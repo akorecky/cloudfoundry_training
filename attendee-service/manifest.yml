@@ -1,0 +1,12 @@
+applications:
+- name: attendee-service
+  path: ./dist/attendee-service-0.1.jar
+  buildpack: java_buildpack
+  disk_quota: 1G
+  instances: 2
+  memory: 768M
+  routes:
+  - route: attendee-service-unbesmirched-hyperdelness.cfapps.io
+  services:
+  - attendee-mysql
+  stack: cflinuxfs2

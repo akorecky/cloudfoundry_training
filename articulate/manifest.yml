@@ -1,0 +1,10 @@
+---
+applications:
+- name: articulate
+  path: dist/articulate-0.3.jar
+  random-route: true
+  memory: 768M 
+  buildpack: java_buildpack
+  services:
+   - attendee-service
+

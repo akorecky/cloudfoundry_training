@@ -1,0 +1,38 @@
+https://12factor.net/
+https://network.pivotal.io/ - for buildpacks
+https://github.com/cloudfoundry
+https://console.run.pivotal.io
+https://docs.cloudfoundry.org
+https://plugins.cloudfoundry.org/
+	install plugin example:
+		cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
+		cf install-plugin blue-green-deploy -r CF-Community
+
+http://pcfdeveloper.cfapps.io - pivotal/nonshallpass
+
+esuez@pivotal.io - Eitan
+
+reactive programming
+martin fawler - monolith to microservice - https://martinfowler.com/bliki/MicroservicePrerequisites.html
+jq json - https://stedolan.github.io/jq/tutorial/
+
+Blue/Green Deployment:
+
+	cf push articulate-v2 -p ./articulate-0.2.jar -m 512M -n {{articulate_hostname_temp}} --no-start
+	cf push articulate-2 -p target/articulate-0.0.3-SNAPSHOT.jar -m 768M -n articulate-ak-temp --no-start
+
+	cf map-route articulate-v2 {{domain_name}} --hostname {{articulate_hostname}}
+	cf map-route articulate-2 cfapps.io --hostname articulate-transisthmian-optimum
+
+	cf unmap-route articulate {{domain_name}} --hostname {{articulate_hostname}}
+	cf unmap-route articulate cfapps.io --hostname articulate-transisthmian-optimum
+
+	blue/green plugin (https://github.com/bluemixgaragelondon/cf-blue-green-deploy)
+	cf bgd articulate --smoke-test ./test-health.sh
+	
+	push - does restage and restart and compiles and deploys code
+	restage - does restart and recompliles the droplet
+	restart - restarts the application
+	
+debug application in cloudfoundry using ssh tunel:
+cf ssh -N -T -L 8000:localhost:8000 articulate
