@@ -1,8 +1,13 @@
+pivotal.io/training/certification
+
+cf help | findstr bind
+
 https://12factor.net/
 https://network.pivotal.io/ - for buildpacks
 https://github.com/cloudfoundry
 https://console.run.pivotal.io
 https://docs.cloudfoundry.org
+https://docs.pivotal.io/pivotalcf
 https://plugins.cloudfoundry.org/
 	install plugin example:
 		cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
@@ -36,3 +41,11 @@ Blue/Green Deployment:
 	
 debug application in cloudfoundry using ssh tunel:
 cf ssh -N -T -L 8000:localhost:8000 articulate
+
+cf create-service-broker mongodb-service-broker-ak pivotal keepitsimple https://mongodb-service-broker-multivoiced-macronutrient.cfapps.io --space-scoped
+cf set-env mongodb-service-broker MONGODB_HOST 54.225.58.157
+cf create-service MongoDB-adriennekorecky standard mongo-service
+cf bind-service spring-music mongo-service
+
+cf create-user-provided-service rate-limiter-service -r https://rate-limiter-app-anticommutative-herbivority.cfapps.io/
+cf bind-route-service cfapps.io rate-limiter-service --hostname attendee-service-unbesmirched-hyperdelness
